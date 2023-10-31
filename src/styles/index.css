@@ -1,3 +1,74 @@
-/* 
-    General Styles
-*/
+.contactList {
+    width: 60%;
+    margin: auto;
+}
+
+.createNew {
+    display: flex;
+    justify-content: right;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+.infoBox {
+    display: flex;
+    height: 200px;
+}
+
+.item {
+        flex: 1;
+        padding-top: 6px;
+        font-size: 20px;
+        color: gray;
+
+}
+
+.card-title {
+    font-size: 30px;
+font-family: Arial}
+
+
+.i1 {
+    font-size: 25px;
+    font-weight:  400;
+
+}
+
+i {
+    padding-right: 10px;
+    font-size: 20px;
+}
+
+.i3 {
+    font-size: 15px;
+}
+
+.icons {
+    display: flex;
+    width: 150px;
+
+    margin-top: 20px;
+    justify-content: space-between;
+    height: 40px;
+
+}
+
+.element {
+    background: none;
+    border: none;
+    font-size: 30px;
+    margin-right: 20px;
+}
+
+.iconBtn {
+    font-size: 25px;
+}
+
+.imgBox {
+    background-color: aqua;
+    align-items: center;
+    margin: auto;
+    border-radius: 100px;
+}
+
+
