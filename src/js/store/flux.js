@@ -1,28 +1,44 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			demo: [
+
+			contact: [
 				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
+					full_name: "Dave Bradley",
+                    email: "dave@gmail.com",
+                    agenda_slug: "my_super_agenda",
+                    address:"47568 NW 34ST, 33434 FL, USA",
+                    phone:"7864445566"
 				},
 				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
+					full_name: "Dave ",
+                    email: "doilo@gmail.com",
+                    agenda_slug: "my_super_agenda",
+                    address:"47568 NW 34ST, 33434 FL, USA",
+                    phone:"7864445566"
 				},
-				{
-					title: "THIRD",
-					background: "white",
-					initial: "white"
-				}
+		
 				
 
 
 			]
 		},
 		actions: {
+
+
+			getContactList: async (agenda_slug) => {
+				try{
+					const response = await fetch(`https://playground.4geeks.com/apis/fake/contact/agenda/${agenda_slug}`)
+
+                    if(!response.ok){
+                        throw new Error("El response ok vino en false. un garrón...")
+
+				}
+			}
+				catch(error){
+					console.log("Se presentó un error al traer la información", error)
+				}
+			},
 
 			
 			createNewContact: async (newContact) => {
