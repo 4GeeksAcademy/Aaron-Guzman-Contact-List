@@ -1,13 +1,19 @@
-/* .contactList {
+h1 {
+    text-align: center;
+}
+
+.contactList {
     width: 60%;
     margin: auto;
+    margin-left: auto;
 }
 
 .createNew {
     display: flex;
-    justify-content: right;
+    justify-content: flex-end;
     margin-top: 10px;
     margin-bottom: 15px;
+    margin-right: 20%;
 }
 
 .infoBox {
@@ -64,11 +70,18 @@ i {
     font-size: 25px;
 }
 
-.imgBox {
-    background-color: aqua;
+/* .imgBox {
+    display: flex;
     align-items: center;
     margin: auto;
-    border-radius: 100px;
+
+   
+} */
+
+img {
+    border: none;
+    border-radius: 50%;
+    height: 400px;
+    width: 400px;
 }
 
- */
