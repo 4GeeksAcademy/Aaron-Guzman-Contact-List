@@ -3,28 +3,61 @@ import { Link } from 'react-router-dom'
 import { Context } from '../store/appContext'
 import "../../styles/ContactCard.css"
 
-const Contact = () => {
+const ContactCard = () => {
     const { store, actions } = useContext(Context)
-    console.log(store.contact);
-    console.log("Hola");
+
     const [mouseHoverDelete, setMouseHoverDelete] = useState(false);
     const [mouseHoverEdit, setMouseHoverEdit] = useState(false);
 
     const handlerMouseHoverDelete = (index) => {
         setMouseHoverDelete({ ...mouseHoverDelete, [index]: true });
     }
-    
+
     const handlerMouseLeaveDelete = (index) => {
         setMouseHoverDelete({ ...mouseHoverDelete, [index]: false });
     }
-    
+
     const handlerMouseHoverEdit = (index) => {
         setMouseHoverEdit({ ...mouseHoverEdit, [index]: true });
     }
-    
+
     const handlerMouseLeaveEdit = (index) => {
         setMouseHoverEdit({ ...mouseHoverEdit, [index]: false });
     }
+
+    const handlerDelete = async (id) => {
+        try {
+            const updatedList = store.contact.filter((contact) => contact.id !== id);
+
+            store.contact = updatedList;
+
+            await actions.deleteContact(id);
+
+
+        } catch (error) {
+            console.error("Ocurrio un error al borrar el contacto", error)
+        }
+
+
+
+    }
+
+    useEffect(() => {
+        const getAgenda = async () => {
+            try {
+
+                await actions.getContactList()
+
+            }
+
+            catch (error) {
+                console.log("Ocurrio un error", error)
+            }
+        }
+        getAgenda();
+    })
+
+
 
 
     return (
@@ -34,7 +67,11 @@ const Contact = () => {
             <header>
 
                 <div className='createNew'>
-                    <button type="button" className="btn btn-success">Add new contact</button>
+
+                    <Link to="/CallAddNewContact">
+                        <button type="button" className="btn btn-success">Add new contact</button>
+                    </Link>
+
                 </div>
 
             </header>
@@ -55,22 +92,22 @@ const Contact = () => {
                                 <div className="card-body">
                                     <h5 className="card-title">{item.full_name}</h5>
                                     <div className='item i1'>
-                                    <i class="fa-solid fa-location-dot"></i>
+                                        <i class="fa-solid fa-location-dot"></i>
 
-                                        Direccion
+                                        {item.address}
 
                                     </div>
 
                                     <div className='item i2'>
-                                    <i class="fa-solid fa-phone"></i>
-                                    
-                                    Telefono
+                                        <i class="fa-solid fa-phone"></i>
+
+                                        {item.phone}
 
                                     </div>
 
                                     <div className='item i3'>
-                                       <i class="fa-solid fa-envelope"></i>
-                                        Mail
+                                        <i class="fa-solid fa-envelope"></i>
+                                        {item.email}
                                     </div>
 
                                 </div>
@@ -80,28 +117,29 @@ const Contact = () => {
                             </div>
 
                             <div className='col-md-2 icons'>
-                            <button className='element' onMouseOver={() => handlerMouseHoverDelete(index)} onMouseLeave={() => handlerMouseLeaveDelete(index)}>
-                                <i className={mouseHoverDelete[index] ? "fa-regular fa-trash-can fa-bounce" : "fa-regular fa-trash-can"}></i>
-                            </button>
+                                <button onClick={() => handlerDelete(item.id)} className='element' onMouseOver={() => handlerMouseHoverDelete(index)} onMouseLeave={() => handlerMouseLeaveDelete(index)}>
+                                    <i className={mouseHoverDelete[index] ? "fa-regular fa-trash-can fa-bounce" : "fa-regular fa-trash-can"}></i>
+                                </button>
 
-                            <button className='element' onMouseOver={() => handlerMouseHoverEdit(index)} onMouseLeave={() => handlerMouseLeaveEdit(index)}>
-                                <i className={mouseHoverEdit[index] ? "fa-solid fa-pen fa-bounce" : "fa-solid fa-pen"}></i>
-                            </button> 
-                             </div>
+                                <button className='element' onMouseOver={() => handlerMouseHoverEdit(index)} onMouseLeave={() => handlerMouseLeaveEdit(index)}>
+                                    <i className={mouseHoverEdit[index] ? "fa-solid fa-pen fa-bounce" : "fa-solid fa-pen"}></i>
+                                </button>
+                            </div>
 
 
                         </div>
                     </div>
 
-                    
+
                 </div>
 
-            ))}
+            ))
+            }
 
 
-        </div>
+        </div >
     )
 
 }
 
-export default Contact
+export default ContactCard

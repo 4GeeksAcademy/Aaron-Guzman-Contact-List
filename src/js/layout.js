@@ -8,8 +8,8 @@ import { Home } from "./views/home";
 import injectContext from "./store/appContext";
 import CallAddNewContact from "./views/CallAddNewContact";
 import CallContactCard from "./views/CallContactCard";
-// import { Navbar } from "./component/navbar";
-// import { Footer } from "./component/footer";
+import { Navbar } from "./component/navbar";
+import { Footer } from "./component/footer";
 
 //create your first component
 const Layout = () => {
@@ -21,7 +21,7 @@ const Layout = () => {
 		<div>
 			<BrowserRouter basename={basename}>
 				<ScrollToTop>
-					{/* <Navbar /> */}
+					<Navbar />
 					<Routes>
 						<Route exact path="/" element={<Home />} />
 						{/* <Route path="/demo" element={<Demo />} />
@@ -30,7 +30,7 @@ const Layout = () => {
 						<Route exact path="/CallAddNewContact" element={<CallAddNewContact />} />
 						<Route exact path="*" element={<h1>Not found!</h1>} />
 					</Routes>
-					{/* <Footer /> */}
+					<Footer />
 				</ScrollToTop>
 			</BrowserRouter>
 		</div>

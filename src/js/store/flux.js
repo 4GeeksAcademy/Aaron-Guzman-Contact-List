@@ -2,38 +2,22 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 
-			contact: [
-				{
-					full_name: "Dave Bradley",
-                    email: "dave@gmail.com",
-                    agenda_slug: "my_super_agenda",
-                    address:"47568 NW 34ST, 33434 FL, USA",
-                    phone:"7864445566"
-				},
-				{
-					full_name: "Dave ",
-                    email: "doilo@gmail.com",
-                    agenda_slug: "my_super_agenda",
-                    address:"47568 NW 34ST, 33434 FL, USA",
-                    phone:"7864445566"
-				},
-		
-				
-
-
-			]
+			contact: []
 		},
 		actions: {
 
 
-			getContactList: async (agenda_slug) => {
+			getContactList: async () => {
 				try{
-					const response = await fetch(`https://playground.4geeks.com/apis/fake/contact/agenda/${agenda_slug}`)
+					const response = await fetch(`https://playground.4geeks.com/apis/fake/contact/agenda/eiron`)
 
                     if(!response.ok){
-                        throw new Error("El response ok vino en false. un garrón...")
-
+                        throw new Error("El response ok vino en false...")
 				}
+
+				const data = await response.json();
+				const store = getStore();
+				setStore({...store, contact:data})
 			}
 				catch(error){
 					console.log("Se presentó un error al traer la información", error)
@@ -51,11 +35,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 						}
 					});
 
+					if(!response.ok){
+						throw new Error("Error en la solicitud de creacion de contacto nuevo")
+					}
 					const data = await response.json();
 					console.log('El contacto se creó correctamente', data);
-
+					const actions = getActions();
+					await actions.getContactList();
 				} catch (error) {
-					console.log("No se pudo crear el nuevo contacto", error);
+					console.error("No se pudo crear el nuevo contacto", error);
 				}
 			},
 
@@ -95,6 +83,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 					const data = await response.json();
 					console.log("El contacto se eliminó correctamente", data)
+					const actions = getActions();
+					await actions.getContactList();
 				}
 
 				catch(error) {
