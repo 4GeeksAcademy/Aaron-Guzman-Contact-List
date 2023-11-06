@@ -6,8 +6,9 @@ import { Home } from "./views/home";
 // import { Demo } from "./views/demo";
 // import { Single } from "./views/single";
 import injectContext from "./store/appContext";
-import CallAddNewContact from "./views/CallAddNewContact";
-import CallContactCard from "./views/CallContactCard";
+import CallAddNewContact from "./views/CallAddNewContact.js";
+import CallContactCard from "./views/CallContactCard.js";
+import CallUpdateContact from "./views/CallUpdateContact.js";
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 
@@ -28,6 +29,7 @@ const Layout = () => {
 						<Route path="/single/:theid" element={<Single />} /> */}
 						<Route exact path="/CallContactCard" element={<CallContactCard />} />
 						<Route exact path="/CallAddNewContact" element={<CallAddNewContact />} />
+						<Route exact path="/CallUpdateContact" element={<CallUpdateContact/>} />
 						<Route exact path="*" element={<h1>Not found!</h1>} />
 					</Routes>
 					<Footer />

@@ -37,7 +37,8 @@ const AddNewContact = () => {
 }
 
 return (
-  <div class Name='container'>
+  
+  <div class Name='container createNew'>
 
     <h1>Add a new contact</h1>
 

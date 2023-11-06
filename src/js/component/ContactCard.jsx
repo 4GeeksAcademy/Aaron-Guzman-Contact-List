@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Context } from '../store/appContext'
 import "../../styles/ContactCard.css"
 
 const ContactCard = () => {
     const { store, actions } = useContext(Context)
+    const navigate = useNavigate(); 
 
     const [mouseHoverDelete, setMouseHoverDelete] = useState(false);
     const [mouseHoverEdit, setMouseHoverEdit] = useState(false);
@@ -37,6 +38,16 @@ const ContactCard = () => {
         } catch (error) {
             console.error("Ocurrio un error al borrar el contacto", error)
         }
+    }
+
+        const handlerEdit = async (contact) => {
+            try {
+                navigate("/CallUpdateContact", {state: {contact}})
+    
+    
+            } catch (error) {
+                console.error("Ocurrio un error al borrar el contacto", error)
+            }
 
 
 
@@ -121,7 +132,7 @@ const ContactCard = () => {
                                     <i className={mouseHoverDelete[index] ? "fa-regular fa-trash-can fa-bounce" : "fa-regular fa-trash-can"}></i>
                                 </button>
 
-                                <button className='element' onMouseOver={() => handlerMouseHoverEdit(index)} onMouseLeave={() => handlerMouseLeaveEdit(index)}>
+                                <button onClick={() => handlerEdit(item, item.id)} className='element' onMouseOver={() => handlerMouseHoverEdit(index)} onMouseLeave={() => handlerMouseLeaveEdit(index)}>
                                     <i className={mouseHoverEdit[index] ? "fa-solid fa-pen fa-bounce" : "fa-solid fa-pen"}></i>
                                 </button>
                             </div>

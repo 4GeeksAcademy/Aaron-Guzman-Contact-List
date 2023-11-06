@@ -2,7 +2,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 
-			contact: []
+			contact: [],
+			editing: false
 		},
 		actions: {
 
@@ -62,6 +63,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 					const data = await response.json();
 					console.log("El contacto se actualizó correctamente", data);
+					const actions = getActions();
+					await actions.getContactList();
 
 
 				} catch (error) {
@@ -89,6 +92,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				catch(error) {
 					console.log("Hubo un error al eliminar el contacto", error)
+				}
+			},
+
+			getOneContact: async (idContact) => {
+				try{
+					const response = await fetch(`https://playground.4geeks.com/apis/fake/contact/${idContact}`,)
+					if(!response.ok){
+						console.log("Ocurrio un error en la solicitud del contacto", error)
+					}
+
+					const data = await response.json();
+					console.log("Solicitud exitosa", data)
+
+				}catch(error){
+					console.error("Ocurrio un error al obtener el contacto", error);
 				}
 			}
 			
